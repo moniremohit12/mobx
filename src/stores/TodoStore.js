@@ -3,39 +3,76 @@ import TodoModel from './TodoModel'
 //  
 class TodoStore {
 
-    //Timer
-    // @observable time
-    // constructor() {
-    //     this.time = new Date();
-    //     this.interval = setInterval(() => {
-    //         this.time = new Date()
-    //     },1000)
-    // }
-
-    // @action
-    // pauseClick() {
-    //     clearInterval(this.interval)
-    // }
-
-    // @action
-    // startClick() {
-    //     this.interval = setInterval(() => {
-    //         this.time = new Date()
-    //     },1000)
-    // }
-
-    //end Timer
-
     @observable todos = [
 
     ]
 
     @observable lastID = 0
+    @observable deletes = false
 
     @action
     addTodo(title) {
-        this.todos.push(new TodoModel(this,title,false,this.lastID++,true))
+        this.todos.push(new TodoModel(this,title,false,this.lastID++,true,false))
     }
+
+    
+    @action
+    all() {
+        todoStore.todos.map(item => {
+            if (item.deletes === true) {
+                item.showing = false;
+            } else {
+                item.showing = true;
+            }
+        })
+    }
+
+    @action
+    active() {
+        this.todos.map(item => {
+            if (item.deletes === true) {
+                item.showing = false;
+            } else {
+                if(item.completed == false) {
+                    item.showing = true;
+                } else {
+                    item.showing = false;
+                    item.lastID--;
+                }
+            }
+        })
+    }
+
+    @action
+    completeds() {
+        this.todos.map(item => {
+            if (item.deletes === true) {
+                item.showing = false;
+            } else {
+                if(item.completed == false ) {
+                    item.showing = false;
+                } else {
+                    item.showing = true;
+                    item.lastID--;
+                }
+            }
+        })
+    }
+
+    @action
+    clearComplateds() {
+        this.todos.map(item => {
+            if (item.deletes === true) {
+                item.showing = false;
+            } else {
+                if(item.completed == true) {
+                    item.showing = false;
+                    item.lastID--;
+                }
+            }
+        })
+    }
+
 
 }
 

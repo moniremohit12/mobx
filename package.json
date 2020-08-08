@@ -2,6 +2,7 @@
   "name": "todo",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://moniremohit12.github.io/mobx",
   "dependencies": {
     "mobx": "^5.8.0",
     "mobx-react": "^5.4.3",
@@ -13,6 +14,8 @@
     "typescript": "^3.9.6"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",

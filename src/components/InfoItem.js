@@ -1,32 +1,32 @@
 import React,{Component} from 'react';
 import {observer} from 'mobx-react'
 import todoStore from '../stores/TodoStore';
-import TodoModel from '../stores/TodoModel';
 
 
 @observer
 class InfoItem extends Component {  
 
-    showAll() {
-        this.props.todo.all();
+    showAll = () => {
+        todoStore.all();
     }
 
     showActive = () => {
-        this.props.todo.active();
+        todoStore.active();
     }
 
     showCompleted = () => {
-        TodoModel.completeds();
+        todoStore.completeds();
     }
 
     showClearCompleted = () => {
-        TodoModel.clearComplateds();
+        todoStore.clearComplateds();
     }
 
     render() {
-        const { todo } = this.props;
         return(
-            <div className="viwe">
+            <div 
+                className={this.props.showInfo? 'dont-show viwe' : 'show viwe'}
+            >
                 <div className="infoitem">
                     <span>{
                         `${todoStore.lastID} items left`

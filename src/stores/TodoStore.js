@@ -67,6 +67,7 @@ class TodoStore {
             } else {
                 if(item.completed == true) {
                     item.showing = false;
+                    item.deletes = true;
                     item.lastID--;
                 }
             }
